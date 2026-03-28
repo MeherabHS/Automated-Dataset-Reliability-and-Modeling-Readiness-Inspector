@@ -1,0 +1,67 @@
+.App {
+  min-height: 100vh;
+  background-color: hsl(var(--background));
+}
+
+/* Table sticky header */
+.audit-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: hsl(var(--muted) / 0.9);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+/* Scrollable table container */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+/* Button press */
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background-color: hsl(var(--border));
+  margin: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* Upload input style */
+.upload-input-wrapper input[type='file'] {
+  cursor: pointer;
+}
+
+/* Muted locked state for placeholder sections */
+.section-locked {
+  opacity: 0.45;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Transition for status color changes only */
+border-color,
+background-color {
+  transition-duration: 150ms;
+}
