@@ -1,0 +1,171 @@
+========================================================================
+  AUTOMATED DATASET RELIABILITY AND MODELING READINESS REPORT
+========================================================================
+  Report generated:        2026-03-28 07:28:49 UTC
+  File:                    dengue dataset.csv
+  Rows:                    209
+  Columns:                 17
+  Target Column:           Not selected
+
+------------------------------------------------------------------------
+  1. DATASET OVERVIEW
+------------------------------------------------------------------------
+
+  Filename:                dengue dataset.csv
+  Rows:                    209
+  Columns:                 17
+  Target Column:           Not selected
+  Encoding:                utf-8
+  Delimiter:               ','
+
+  Column names:
+    adm_0_name, adm_1_name, adm_2_name, full_name, ISO_A0,
+    FAO_GAUL_code, RNE_iso_code, IBGE_code, calendar_start_date,
+    calendar_end_date, Year, dengue_total,
+    case_definition_standardised, S_res, T_res, UUID, region
+
+------------------------------------------------------------------------
+  2. SCHEMA DIAGNOSTICS
+------------------------------------------------------------------------
+
+  Total Columns:           17
+  Total Rows:              209
+
+  Column type inference:
+    adm_0_name                   categorical   null: 0%  unique: 1
+    adm_1_name                   empty         null: 100%  unique: 0  [ALL MISSING]
+    adm_2_name                   empty         null: 100%  unique: 0  [ALL MISSING]
+    full_name                    categorical   null: 0%  unique: 1
+    ISO_A0                       categorical   null: 0%  unique: 1
+    FAO_GAUL_code                numeric       null: 0%  unique: 1
+    RNE_iso_code                 categorical   null: 0%  unique: 1
+    IBGE_code                    empty         null: 100%  unique: 0  [ALL MISSING]
+    calendar_start_date          text          null: 0%  unique: 209
+    calendar_end_date            text          null: 0%  unique: 209
+    Year                         numeric       null: 0%  unique: 42
+    dengue_total                 numeric       null: 0%  unique: 151
+    case_definition_standardised categorical   null: 0%  unique: 2
+    S_res                        categorical   null: 0%  unique: 1
+    T_res                        categorical   null: 0%  unique: 2
+    UUID                         categorical   null: 0%  unique: 6
+    region                       categorical   null: 0%  unique: 1
+
+  Type-mismatch warnings: None
+
+------------------------------------------------------------------------
+  3. MISSINGNESS SUMMARY
+------------------------------------------------------------------------
+
+  Total Missing Cells:     627 of 3,553
+  Overall Missing %:       17.6471%
+  Rows with Missing:       209 (100% of rows)
+
+  Per-column breakdown (columns with missing values only):
+  - adm_1_name: 209 missing (100%)  — Consider dropping — high
+    missingness (>50%)
+  - adm_2_name: 209 missing (100%)  — Consider dropping — high
+    missingness (>50%)
+  - IBGE_code: 209 missing (100%)  — Consider dropping — high
+    missingness (>50%)
+
+------------------------------------------------------------------------
+  4. DUPLICATE ANALYSIS
+------------------------------------------------------------------------
+
+  Duplicate Row Count:     0
+  Duplicate %:             0.0%
+  Risk Label:              Low
+
+  No exact duplicate rows detected.
+
+------------------------------------------------------------------------
+  5. NUMERIC OUTLIER SUMMARY
+------------------------------------------------------------------------
+
+  Method: IQR (Interquartile Range)
+          Lower bound = Q1 − 1.5 × IQR
+          Upper bound = Q3 + 1.5 × IQR
+
+  Column                         Q1         Q3      Lower      Upper   Outliers       %
+  -------------------------------------------------------------------------------------
+  FAO_GAUL_code                  23         23         23         23          0    0.0%
+  Year                         2012       2020       2000       2032         16 7.6555%
+  dengue_total                    9        869      -1281       2159         35 16.7464%
+
+------------------------------------------------------------------------
+  6. CLASS IMBALANCE SUMMARY
+------------------------------------------------------------------------
+
+  Not applicable: No target column selected
+
+------------------------------------------------------------------------
+  7. LEAKAGE-RISK INDICATORS
+------------------------------------------------------------------------
+
+  Flagged Columns:         1
+
+  Flagged columns:
+  - UUID  [matched keyword(s): id]
+
+  Keywords checked:
+    completed, discharge, final, future, id, label, outcome, post,
+    prediction, result, status, target
+
+------------------------------------------------------------------------
+  8. MODELING READINESS SCORE
+------------------------------------------------------------------------
+
+  Score:                   65 / 100
+  Score Band:              Needs preprocessing
+
+  Summary:
+    The dataset scored 65/100 (Needs preprocessing). 3 issues reduced
+    the score by 35 points in total. Applied penalties: Missingness
+    (−20); Outliers (−5); Leakage risk (−10). 1 check could not be
+    evaluated (Class imbalance) and did not affect the score.
+
+  Score band reference:
+    >= 85   Ready
+    70-84   Acceptable with preprocessing
+    50-69   Needs preprocessing
+    < 50    High risk
+
+  Applied penalties (total deducted: -35):
+  - - 20  Missingness: 17.6% of cells are missing (>10% band)
+  - -  5  Outliers: Column 'dengue_total' has 16.7% outliers (>10%
+    threshold)
+  - - 10  Leakage risk: 1 column(s) contain leakage-risk keywords: UUID
+
+  Not-applicable checks:
+  - Class imbalance: No target column selected
+
+------------------------------------------------------------------------
+  9. RECOMMENDATIONS
+------------------------------------------------------------------------
+
+  [!] High missingness detected
+      Overall missingness is 17.6471%. Consider imputing missing values
+      using column statistics (mean, median, or mode) or filtering rows
+      where critical columns are missing. Affected columns: adm_1_name,
+      adm_2_name, IBGE_code.
+
+  [!] Outliers detected in numeric columns
+      1 column(s) exceed 10% IQR outlier rate (highest: 16.7464%):
+      dengue_total. Investigate these values before modelling. Do not
+      apply automatic outlier removal without domain review.
+
+  [!] Leakage-risk columns detected
+      1 column(s) contain leakage-risk keywords: UUID. Review each
+      flagged column carefully and exclude any that encode information
+      derived from or correlated with the target variable before
+      modelling.
+
+  No action required for:
+  - Duplicates, Datatype anomalies
+
+  Not applicable (not evaluated):
+  - Class imbalance
+
+========================================================================
+  END OF REPORT
+========================================================================
