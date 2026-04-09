@@ -20,7 +20,10 @@ app = FastAPI(title="Automated Dataset Reliability and Modeling Readiness Inspec
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://automated-deterministic-inspector.netlify.app"],
+    allow_origins=[
+        "https://automated-deterministic-inspector.netlify.app",
+        "http://localhost:3000"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
